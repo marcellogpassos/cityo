@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="row">
+
+        <div class="row">
+            <h2>Cadastrar usu&aacute;rio</h2>
+        </div>
+
+        <div>{{usuario}}</div>
+
+        <div class="row">
+            <form class="col s12">
+
+                <div class="row">
+                    <h3>Login</h3>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input id="email_input" name="email" type="email" class="validate"
+                               ng-model="usuario.login.email" required maxlength="255">
+                        <label for="email_input">E-mail</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="email_confirmation_input" name="email_confirmation" type="email" class="validate"
+                               required maxlength="255">
+                        <label for="email_confirmation_input">Confirme seu e-mail</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input id="senha_input" name="senha" type="password" class="validate"
+                               ng-model="usuario.login.senha" required maxlength="32">
+                        <label for="senha_input">Senha</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="senha_confirmation_input" name="senha_confirmation" type="password"
+                               class="validate" required maxlength="32">
+                        <label for="senha_confirmation_input">Confirme sua senha</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3>Dados b&aacute;sicos</h3>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input id="nome_input" name="nome" type="text" class="validate"
+                               ng-model="usuario.dadosBasicos.nome" required maxlength="128">
+                        <label for="nome_input">Nome</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="sobrenome_input" name="sobrenome" type="text" class="validate"
+                               ng-model="usuario.dadosBasicos.sobrenome" required maxlength="128">
+                        <label for="sobrenome_input">Sobrenome</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input id="cpf_input" name="cpf" type="text" class="validate"
+                               ng-model="usuario.dadosBasicos.cpf" required maxlength="11">
+                        <label for="cpf_input">CPF</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="nascimento_input" name="nascimento" type="text" class="datepicker validate"
+                               ng-model="usuario.dadosBasicos.dataNascimento" required>
+                        <label for="nascimento_input">Data de nascimento</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field radio-button-div col s12 m6">
+                        <div class="input-field radio-button-label col s12 m2">
+                            <label>Sexo:</label>
+                        </div>
+                        <div class="input-field col s12 m4">
+                            <input id="feminino_input" name="genero" type="radio" value="F"
+                                   ng-model="usuario.dadosBasicos.sexo" required/>
+                            <label for="feminino_input">Feminino</label>
+                        </div>
+                        <div class="input-field col s12 m4">
+                            <input id="masculino_input" name="genero" type="radio" value="M"
+                                   ng-model="usuario.dadosBasicos.sexo" required/>
+                            <label for="masculino_input">Masculino</label>
+                        </div>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="telefone_input" name="telefone" type="text" class="validate"
+                               ng-model="usuario.dadosBasicos.telefone">
+                        <label for="telefone_input">Telefone</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3>Endere&ccedil;o</h3>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

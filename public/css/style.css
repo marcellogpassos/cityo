@@ -1,0 +1,63 @@
+.icon-block {
+    padding: 0 15px;
+}
+
+.icon-block .material-icons {
+    font-size: inherit;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container > .row {
+    margin: 0 5px;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.login-presentation p {
+    margin: 25px;
+    font-size: 21px;
+    font-weight: 300;
+}
+
+.radio-button-div {
+    margin-bottom: 24px;
+}
+
+.radio-button-div .radio-button-label {
+    margin-bottom: 20px;
+}
+
+@media screen and (min-height: 768px) {
+
+    .container {
+        margin: auto;
+    }
+
+    .login {
+        margin-top: 60px;
+    }
+
+    .login-presentation .card-content {
+        min-height: 360px;
+    }
+
+    .md-right-align {
+        text-align: right;
+    }
+
+    .radio-button-div {
+        margin-bottom: auto;
+    }
+
+    .radio-button-div .radio-button-label {
+        margin-bottom: auto;
+    }
+
+}

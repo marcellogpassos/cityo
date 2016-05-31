@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="pt-Br" ng-app="cityo">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="lib/Materialize/css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/style.css" media="screen,projection"/>
+
+    <!-- Libs -->
+    <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular-ui-router/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/Materialize/js/materialize.min.js"></script>
+
+    <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+
+    <!-- Config -->
+    <script type="text/javascript" src="js/config/routeConfig.js"></script>
+
+    <!-- Controllers -->
+    <script type="text/javascript" src="js/controllers/homeCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/loginCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/usuariosCtrl.js"></script>
+
+    <!-- Services -->
+    <script type="text/javascript" src="js/services/datepickerService.js"></script>
+    <script type="text/javascript" src="js/services/enderecoService.js"></script>
+
+    <title>Cityo :: Can I Take Your Order?</title>
+</head>
+
+<body>
+
+    <nav class="red darken-2" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">CITYO</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#/home">Home</a></li>
+            </ul>
+
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="#/home">Home</a></li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+
+    <main ui-view="mainView"></main>
+
+    <footer ng-include="'view/default/footer.html'"></footer>
+
+</body>
+</html>
