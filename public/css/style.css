@@ -1,3 +1,15 @@
+.input-field select {
+    border: 0;
+    border-bottom: 1px #9e9e9e solid;
+    height: 46px;
+    font-size: 1rem;;
+    margin: 0 0 15px 0;
+}
+
+select:focus {
+    outline: 0;
+}
+
 .icon-block {
     padding: 0 15px;
 }
@@ -18,6 +30,7 @@ body {
 
 main {
     flex: 1 0 auto;
+    padding-top: 60px;
 }
 
 .login-presentation p {
@@ -26,7 +39,11 @@ main {
     font-weight: 300;
 }
 
-.radio-button-div .radio-button-label {
+.sexo-div {
+    margin-bottom: 36px;
+}
+
+.sexo-div .sexo-label {
     position: relative;
     top: 12px;
     margin-right: 20px;
@@ -50,7 +67,7 @@ main {
         text-align: right;
     }
 
-    .radio-button-div .radio-button-label {
+    .sexo-div .sexo-label {
         margin-bottom: auto;
     }
 

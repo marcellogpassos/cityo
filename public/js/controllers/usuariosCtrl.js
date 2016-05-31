@@ -61,4 +61,8 @@ app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
         // TODO: implementar
     };
 
+    $scope.$on('$viewContentLoaded', function () {
+        $('select').material_select();
+    });
+
 });

@@ -5,8 +5,6 @@
             <h2>Cadastrar usu&aacute;rio</h2>
         </div>
 
-        <div>{{usuario}}</div>
-
         <div class="row">
             <form name="usuarioForm" class="col s12">
 
@@ -15,29 +13,31 @@
                 </div>
 
                 <div class="row">
+
                     <div class="input-field col s12 m6">
                         <input id="email_input" name="email" type="email" class="validate"
                                ng-model="usuario.login.email" required maxlength="255">
                         <label for="email_input">E-mail</label>
                     </div>
+
                     <div class="input-field col s12 m6">
                         <input id="email_confirmation_input" name="confirmacao_email" type="email" class="validate"
                                required maxlength="255">
                         <label for="email_confirmation_input">Confirme seu e-mail</label>
                     </div>
-                </div>
 
-                <div class="row">
                     <div class="input-field col s12 m6">
                         <input id="senha_input" name="senha" type="password" class="validate"
                                ng-model="usuario.login.senha" required maxlength="32">
                         <label for="senha_input">Senha</label>
                     </div>
+
                     <div class="input-field col s12 m6">
                         <input id="senha_confirmation_input" name="confirmacao_senha" type="password"
                                class="validate" required maxlength="32">
                         <label for="senha_confirmation_input">Confirme sua senha</label>
                     </div>
+
                 </div>
 
                 <div class="row">
@@ -45,24 +45,25 @@
                 </div>
 
                 <div class="row">
+
                     <div class="input-field col s12 m6">
                         <input id="nome_input" name="nome" type="text" class="validate"
                                ng-model="usuario.dadosBasicos.nome" required maxlength="128">
                         <label for="nome_input">Nome</label>
                     </div>
+
                     <div class="input-field col s12 m6">
                         <input id="sobrenome_input" name="sobrenome" type="text" class="validate"
                                ng-model="usuario.dadosBasicos.sobrenome" required maxlength="128">
                         <label for="sobrenome_input">Sobrenome</label>
                     </div>
-                </div>
 
-                <div class="row">
                     <div class="input-field col s12 m4">
                         <input id="cpf_input" name="cpf" type="text" class="validate"
                                ng-model="usuario.dadosBasicos.cpf" required maxlength="11">
                         <label for="cpf_input">CPF</label>
                     </div>
+
                     <div class="input-field col s12 m4">
                         <input id="nascimento_input" name="nascimento" type="text" class="datepicker">
                         <label for="nascimento_input">Data de nascimento</label>
@@ -73,12 +74,9 @@
                                ng-model="usuario.dadosBasicos.telefone">
                         <label for="telefone_input">Telefone</label>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="input-field radio-button-div col s12 m6">
-
-                        <spam><label class="radio-button-label">Sexo:</label></spam>
+                    <div class="input-field sexo-div col s12 m6">
+                        <spam><label class="sexo-label">Sexo:</label></spam>
                         <spam>
                             <input name="sexo" type="radio" id="feminino_input" value="F"
                                    ng-model="usuario.dadosBasicos.sexo" required/>
@@ -89,16 +87,45 @@
                                    ng-model="usuario.dadosBasicos.sexo" required/>
                             <label for="masculino_input">Masculino</label>
                         </spam>
-
                     </div>
+
                 </div>
 
                 <div class="row">
                     <h3>Endere&ccedil;o</h3>
                 </div>
 
+                <div class="row">
+
+                    <div class="input-field col s12 m4">
+                        <input id="cep_input" name="cep" type="text" class="validate"
+                               ng-model="usuario.endereco.cep" required maxlength="8">
+                        <label for="cep_input">CEP</label>
+                    </div>
+
+                    <div class="input-field col s12 m2">
+                        <label>Unidade Federativa</label>
+                        <select id="uf_input" class="browser-default" ng-model="usuario.endereco.uf">
+                            <option value=""></option>
+                            <option value="1">PB</option>
+                        </select>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <label>Munic&iacute;pio</label>
+                        <select id="municipio_input" class="browser-default" ng-model="usuario.endereco.municipio">
+                            <option value=""></option>
+                            <option value="1">Jo&atilde;o Pessoa</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div>
+                    {{usuario.endereco}}
+                </div>
+
                 <div ng-if="usuarioForm.$error.required">
-                    Campos obrigatórios não preenchidos:
                     <ul>
                         <li ng-repeat="erro in usuarioForm.$error.required" ng-if="erro.$dirty">{{erro.$name}}</li>
                     </ul>

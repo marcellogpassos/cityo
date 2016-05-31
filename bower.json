@@ -3,9 +3,9 @@
   "description": "Can I Take Your Order?",
   "version": "1.0.0",
   "dependencies": {
-    "angular":              "1.5.5",
-    "angular-ui-router":    "^0.3.0",
-    "jquery":               "jQuery#2.1.4",
-    "Materialize":          "materialize#^0.97.6"
+    "angular": "1.5.5",
+    "angular-ui-router": "^0.3.0",
+    "jquery": "jQuery#2.1.4",
+    "Materialize": "materialize#^0.97.6"
   }
 }
