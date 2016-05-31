@@ -1,10 +1,5 @@
 app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
 
-    var picker = Datepicker.getDatepicker('#nascimento_input', null, new Date(), function () {
-        $scope.usuario.dadosBasicos.dataNascimento = picker.get();
-        $(selector).blur();
-    });
-
     $scope.usuario = {
         login: {
             email: null,
@@ -28,6 +23,14 @@ app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
             complemento: null
         }
     };
+
+    $scope.setNascimento = function (date) {
+        $scope.usuario.dadosBasicos.dataNascimento = Datepicker.fromBrDateFormat(date);
+    };
+
+    var picker = Datepicker.getDatepicker('#nascimento_input', null, new Date(), function () {
+        $scope.setNascimento(picker.get());
+    });
 
     $scope.ufs = null;
     $scope.municipios = null;

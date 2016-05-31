@@ -3,6 +3,7 @@ app.factory("Datepicker", function () {
     var _getDatepicker = function (selector, min, max, onCloseFunction) {
         var $inputData = $(selector).pickadate({
             format: 'dd/mm/yyyy',
+            formatSubmit: 'dd/mm/yyyy',
             min: (min ? min : undefined),
             max: (max ? max : undefined),
             onClose: (onCloseFunction ? onCloseFunction : undefined),
@@ -25,8 +26,25 @@ app.factory("Datepicker", function () {
         return $inputData.pickadate('picker');
     };
 
+    var _fromBrDateFormat = function (brFormat) {
+        var date = brFormat.split('/').reverse();
+        date[1]--;
+        return new Date(date.join('-'));
+    };
+
+    var _toBrDateFormat = function (inputFormat) {
+        function pad(s) {
+            return (s < 10) ? '0' + s : s;
+        }
+
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    };
+
     return {
-        getDatepicker: _getDatepicker
+        getDatepicker: _getDatepicker,
+        fromBrDateFormat: _fromBrDateFormat,
+        toBrDateFormat: _toBrDateFormat
     };
 
 });

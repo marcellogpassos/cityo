@@ -26,12 +26,10 @@ main {
     font-weight: 300;
 }
 
-.radio-button-div {
-    margin-bottom: 24px;
-}
-
 .radio-button-div .radio-button-label {
-    margin-bottom: 20px;
+    position: relative;
+    top: 12px;
+    margin-right: 20px;
 }
 
 @media screen and (min-height: 768px) {
@@ -50,10 +48,6 @@ main {
 
     .md-right-align {
         text-align: right;
-    }
-
-    .radio-button-div {
-        margin-bottom: auto;
     }
 
     .radio-button-div .radio-button-label {

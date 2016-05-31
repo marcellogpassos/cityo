@@ -8,7 +8,7 @@
         <div>{{usuario}}</div>
 
         <div class="row">
-            <form class="col s12">
+            <form name="usuarioForm" class="col s12">
 
                 <div class="row">
                     <h3>Login</h3>
@@ -21,7 +21,7 @@
                         <label for="email_input">E-mail</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <input id="email_confirmation_input" name="email_confirmation" type="email" class="validate"
+                        <input id="email_confirmation_input" name="confirmacao_email" type="email" class="validate"
                                required maxlength="255">
                         <label for="email_confirmation_input">Confirme seu e-mail</label>
                     </div>
@@ -34,7 +34,7 @@
                         <label for="senha_input">Senha</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <input id="senha_confirmation_input" name="senha_confirmation" type="password"
+                        <input id="senha_confirmation_input" name="confirmacao_senha" type="password"
                                class="validate" required maxlength="32">
                         <label for="senha_confirmation_input">Confirme sua senha</label>
                     </div>
@@ -58,35 +58,17 @@
                 </div>
 
                 <div class="row">
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m4">
                         <input id="cpf_input" name="cpf" type="text" class="validate"
                                ng-model="usuario.dadosBasicos.cpf" required maxlength="11">
                         <label for="cpf_input">CPF</label>
                     </div>
-                    <div class="input-field col s12 m6">
-                        <input id="nascimento_input" name="nascimento" type="text" class="datepicker validate"
-                               ng-model="usuario.dadosBasicos.dataNascimento" required>
+                    <div class="input-field col s12 m4">
+                        <input id="nascimento_input" name="nascimento" type="text" class="datepicker">
                         <label for="nascimento_input">Data de nascimento</label>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="input-field radio-button-div col s12 m6">
-                        <div class="input-field radio-button-label col s12 m2">
-                            <label>Sexo:</label>
-                        </div>
-                        <div class="input-field col s12 m4">
-                            <input id="feminino_input" name="genero" type="radio" value="F"
-                                   ng-model="usuario.dadosBasicos.sexo" required/>
-                            <label for="feminino_input">Feminino</label>
-                        </div>
-                        <div class="input-field col s12 m4">
-                            <input id="masculino_input" name="genero" type="radio" value="M"
-                                   ng-model="usuario.dadosBasicos.sexo" required/>
-                            <label for="masculino_input">Masculino</label>
-                        </div>
-                    </div>
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s12 m4">
                         <input id="telefone_input" name="telefone" type="text" class="validate"
                                ng-model="usuario.dadosBasicos.telefone">
                         <label for="telefone_input">Telefone</label>
@@ -94,7 +76,32 @@
                 </div>
 
                 <div class="row">
+                    <div class="input-field radio-button-div col s12 m6">
+
+                        <spam><label class="radio-button-label">Sexo:</label></spam>
+                        <spam>
+                            <input name="sexo" type="radio" id="feminino_input" value="F"
+                                   ng-model="usuario.dadosBasicos.sexo" required/>
+                            <label for="feminino_input">Feminino</label>
+                        </spam>
+                        <spam>
+                            <input name="sexo" type="radio" id="masculino_input" value="M"
+                                   ng-model="usuario.dadosBasicos.sexo" required/>
+                            <label for="masculino_input">Masculino</label>
+                        </spam>
+
+                    </div>
+                </div>
+
+                <div class="row">
                     <h3>Endere&ccedil;o</h3>
+                </div>
+
+                <div ng-if="usuarioForm.$error.required">
+                    Campos obrigatórios não preenchidos:
+                    <ul>
+                        <li ng-repeat="erro in usuarioForm.$error.required" ng-if="erro.$dirty">{{erro.$name}}</li>
+                    </ul>
                 </div>
 
             </form>
