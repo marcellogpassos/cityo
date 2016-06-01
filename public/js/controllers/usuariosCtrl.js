@@ -1,9 +1,13 @@
 app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
 
+    $scope.confirmacaoEmail = null;
+    $scope.confirmacaoSenha = null;
+
     $scope.usuario = {
         login: {
             email: null,
-            senha: null
+            senha: null,
+            aceitoTermos: null
         },
         dadosBasicos: {
             nome: null,
@@ -29,7 +33,7 @@ app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
     };
 
     var picker = Datepicker.getDatepicker('#nascimento_input', null, new Date(), function () {
-        $scope.setNascimento(picker.get());
+        $scope.$apply($scope.setNascimento(picker.get()));
     });
 
     $scope.ufs = null;
@@ -61,8 +65,28 @@ app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
         // TODO: implementar
     };
 
-    $scope.$on('$viewContentLoaded', function () {
-        $('select').material_select();
-    });
+    $scope.confirmacaoInvalida = function (campo, confirmacaoEmailCampo) {
+        return (campo && confirmacaoEmailCampo && (campo != confirmacaoEmailCampo));
+    }
+
+    $scope.validarFormulario = function (form) {
+        if(form.$error.required || !$scope.usuario.dadosBasicos.dataNascimento)
+            return false;
+
+        if($scope.confirmacaoInvalida($scope.usuario.login.email, $scope.confirmacaoEmail) ||
+            $scope.confirmacaoInvalida($scope.usuario.login.senha, $scope.confirmacaoSenha))
+            return false;
+
+        return true;
+    }
+
+    $scope.abrirModal = function (selector) {
+        $(selector).openModal();
+    }
+
+    $scope.aceitarTermosFecharModal = function (selector) {
+        $scope.usuario.login.aceitoTermos = true;
+        $(selector).closeModal();
+    }
 
 });

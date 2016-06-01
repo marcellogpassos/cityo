@@ -1,3 +1,4 @@
 var app = angular.module('cityo', [
-    'ui.router'
+    'ui.router',
+    'ui.utils.masks'
 ]);

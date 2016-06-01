@@ -6,6 +6,7 @@
     "angular": "1.5.5",
     "angular-ui-router": "^0.3.0",
     "jquery": "jQuery#2.1.4",
-    "Materialize": "materialize#^0.97.6"
+    "Materialize": "materialize#^0.97.6",
+    "angular-input-masks": "^2.3.0"
   }
 }

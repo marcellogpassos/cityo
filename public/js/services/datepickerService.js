@@ -28,7 +28,6 @@ app.factory("Datepicker", function () {
 
     var _fromBrDateFormat = function (brFormat) {
         var date = brFormat.split('/').reverse();
-        date[1]--;
         return new Date(date.join('-'));
     };
 
