@@ -1,4 +1,4 @@
-app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderecos) {
+app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderecos, Util, Messages) {
 
     $scope.usuario = {
         login: {
@@ -50,7 +50,7 @@ app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderec
     Enderecos.listarUfs(function (ufs) {
         $scope.ufs = ufs;
     }, function (error) {
-        console.log("Não foi possível carregar a lista de UF's!");
+        console.log(Messages.error[0]);
     });
 
     $scope.setCep = function (cep) {
@@ -61,7 +61,7 @@ app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderec
 
         Enderecos.consultarCep(cep, function (endereco) {
             if (endereco.erro)
-                console.log("Não foi possível carregar o endereço! CEP fornecido: " + cep);
+                console.log(Util.format(Messages.error[1], cep));
 
             else {
                 $scope.usuario.endereco.bairro = endereco.bairro;
@@ -80,7 +80,7 @@ app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderec
             $scope.setCepBusy = false;
 
         }, function (error) {
-            console.log("Não foi possível carregar o endereço! CEP fornecido: " + cep);
+            console.log(Util.format(Messages.error[1], cep));
 
             $scope.setCepBusy = false;
         });
@@ -99,14 +99,14 @@ app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderec
                     $scope.municipios = municipios;
                 } else {
                     var errorMessage =
-                        municipios ? municipios.mensagem : "Não foi possível carregar a lista de Municípios! UF fornecido: " + ufId;
+                        municipios ? municipios.mensagem : Util.format(Messages.error[2], ufId);
 
                     console.log(errorMessage);
                 }
 
                 $scope.setUfBusy = false;
             }, function (error) {
-                console.log("Não foi possível carregar a lista de Municípios! UF fornecido: " + ufId);
+                console.log(Util.format(Messages.error[2], ufId));
 
                 $scope.setUfBusy = true;
             });
@@ -115,7 +115,7 @@ app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderec
     };
 
     $scope.cadastrarUsuario = function (usuario) {
-        // TODO: implementar
+        alert(Util.format(Messages.success[0], usuario.dadosBasicos.nome));
     };
 
     $scope.confirmacaoInvalida = function (campo, confirmacaoEmailCampo) {

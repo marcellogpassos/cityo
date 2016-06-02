@@ -188,7 +188,7 @@
 
                 <div class="row">
                     <div class="input-field col s12 center-align">
-                        <button type="submit" name="action"
+                        <button type="submit" name="action" ng-click="cadastrarUsuario(usuario)" ng-disabled="!validarFormulario(usuarioForm)"
                                 class="btn blue waves-effect waves-light ng-class:{ 'disabled': !validarFormulario(usuarioForm) };">
                             Cadastrar
                         </button>
