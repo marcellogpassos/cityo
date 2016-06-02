@@ -1,4 +1,4 @@
-app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
+app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderecos) {
 
     $scope.usuario = {
         login: {
@@ -31,12 +31,17 @@ app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
     $scope.ufs = null;
     $scope.municipios = null;
 
+    $scope.setCepBusy = false;
+    $scope.setUfBusy = false;
+
     $scope.setNascimento = function (date) {
         $scope.usuario.dadosBasicos.dataNascimento = Datepicker.fromBrDateFormat(date);
     };
 
     var picker = Datepicker.getDatepicker('#nascimento_input', null, new Date(), function () {
-        $scope.$apply($scope.setNascimento(picker.get()));
+        $rootScope.safeApply(function () {
+            $scope.setNascimento(picker.get());
+        });
     });
 
     $scope.ufs = null;
@@ -49,50 +54,61 @@ app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
     });
 
     $scope.setCep = function (cep) {
-
         if (!cep || cep.length != 8)
             return;
 
-        Enderecos.consultarCep(cep, function (endereco) {
+        $scope.setCepBusy = true;
 
+        Enderecos.consultarCep(cep, function (endereco) {
             if (endereco.erro)
                 console.log("Não foi possível carregar o endereço! CEP fornecido: " + cep);
 
             else {
-                $scope.setUf(Enderecos.getUfId(endereco.ibge));
-
-                $scope.usuario.endereco.uf = Enderecos.getUfId(endereco.ibge);
-                $scope.usuario.endereco.municipio = Enderecos.getMunicipioId(endereco.ibge);
                 $scope.usuario.endereco.bairro = endereco.bairro;
                 $scope.usuario.endereco.logradouro = endereco.logradouro;
                 $scope.usuario.endereco.complemento = endereco.complemento;
+
+                var ufId = Enderecos.getUfId(endereco.ibge);
+                var municipioId = Enderecos.getMunicipioId(endereco.ibge);
+
+                $scope.usuario.endereco.uf = ufId;
+                $scope.usuario.endereco.municipio = municipioId;
+
+                $scope.setUf(ufId);
             }
+
+            $scope.setCepBusy = false;
 
         }, function (error) {
             console.log("Não foi possível carregar o endereço! CEP fornecido: " + cep);
+
+            $scope.setCepBusy = false;
         });
-
     };
 
-    var atualizarCampos = function() {
-        $('#municipio_input').val($scope.usuario.endereco.municipio);
-        $('#uf_input').val($scope.usuario.endereco.uf);
-    };
-
-    $scope.setUf = function (uf) {
-
-        if (!uf)
+    $scope.setUf = function (ufId) {
+        if (!ufId)
             $scope.usuario.endereco.uf = $scope.usuario.endereco.municipio = $scope.municipios = null;
 
-        else if (uf == $scope.usuario.endereco.uf)
-            return;
-
         else {
-            Enderecos.listarMunicipios(uf, function (municipios) {
-                $scope.municipios = municipios;
-                atualizarCampos();
+            $scope.setUfBusy = true;
+
+            Enderecos.listarMunicipios(ufId, function (municipios) {
+
+                if (municipios && !municipios.erro) {
+                    $scope.municipios = municipios;
+                } else {
+                    var errorMessage =
+                        municipios ? municipios.mensagem : "Não foi possível carregar a lista de Municípios! UF fornecido: " + ufId;
+
+                    console.log(errorMessage);
+                }
+
+                $scope.setUfBusy = false;
             }, function (error) {
-                console.log("Não foi possível carregar a lista de Municípios! UF fornecido: " + uf);
+                console.log("Não foi possível carregar a lista de Municípios! UF fornecido: " + ufId);
+
+                $scope.setUfBusy = true;
             });
         }
 
