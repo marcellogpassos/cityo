@@ -11,6 +11,9 @@ gulp.task('default', function () {
     gulp.src(src_dir + "angular-input-masks/angular-input-masks-standalone.min.js")
         .pipe(gulp.dest(dst_dir + "angular-input-masks"));
 
+    gulp.src(src_dir + "angular-resource/angular-resource.min.js")
+        .pipe(gulp.dest(dst_dir + "angular-resource"));
+
     gulp.src(src_dir + "angular-ui-router/release/angular-ui-router.min.js")
         .pipe(gulp.dest(dst_dir + "angular-ui-router"));
 

@@ -1,8 +1,5 @@
 app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
 
-    $scope.confirmacaoEmail = null;
-    $scope.confirmacaoSenha = null;
-
     $scope.usuario = {
         login: {
             email: null,
@@ -28,6 +25,12 @@ app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
         }
     };
 
+    $scope.confirmacaoEmail = null;
+    $scope.confirmacaoSenha = null;
+
+    $scope.ufs = null;
+    $scope.municipios = null;
+
     $scope.setNascimento = function (date) {
         $scope.usuario.dadosBasicos.dataNascimento = Datepicker.fromBrDateFormat(date);
     };
@@ -42,23 +45,57 @@ app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
     Enderecos.listarUfs(function (ufs) {
         $scope.ufs = ufs;
     }, function (error) {
-        // TODO: implementar
+        console.log("Não foi possível carregar a lista de UF's!");
     });
 
     $scope.setCep = function (cep) {
+
+        if (!cep || cep.length != 8)
+            return;
+
         Enderecos.consultarCep(cep, function (endereco) {
-            // TODO: implementar
+
+            if (endereco.erro)
+                console.log("Não foi possível carregar o endereço! CEP fornecido: " + cep);
+
+            else {
+                $scope.setUf(Enderecos.getUfId(endereco.ibge));
+
+                $scope.usuario.endereco.uf = Enderecos.getUfId(endereco.ibge);
+                $scope.usuario.endereco.municipio = Enderecos.getMunicipioId(endereco.ibge);
+                $scope.usuario.endereco.bairro = endereco.bairro;
+                $scope.usuario.endereco.logradouro = endereco.logradouro;
+                $scope.usuario.endereco.complemento = endereco.complemento;
+            }
+
         }, function (error) {
-            // TODO: implementar
+            console.log("Não foi possível carregar o endereço! CEP fornecido: " + cep);
         });
+
+    };
+
+    var atualizarCampos = function() {
+        $('#municipio_input').val($scope.usuario.endereco.municipio);
+        $('#uf_input').val($scope.usuario.endereco.uf);
     };
 
     $scope.setUf = function (uf) {
-        Enderecos.listarMunicipios(uf, function (municipios) {
-            $scope.municipios = municipios;
-        }, function (error) {
-            // TODO: implementar
-        });
+
+        if (!uf)
+            $scope.usuario.endereco.uf = $scope.usuario.endereco.municipio = $scope.municipios = null;
+
+        else if (uf == $scope.usuario.endereco.uf)
+            return;
+
+        else {
+            Enderecos.listarMunicipios(uf, function (municipios) {
+                $scope.municipios = municipios;
+                atualizarCampos();
+            }, function (error) {
+                console.log("Não foi possível carregar a lista de Municípios! UF fornecido: " + uf);
+            });
+        }
+
     };
 
     $scope.cadastrarUsuario = function (usuario) {
@@ -67,26 +104,26 @@ app.controller('usuariosCtrl', function ($scope, Datepicker, Enderecos) {
 
     $scope.confirmacaoInvalida = function (campo, confirmacaoEmailCampo) {
         return (campo && confirmacaoEmailCampo && (campo != confirmacaoEmailCampo));
-    }
+    };
 
     $scope.validarFormulario = function (form) {
-        if(form.$error.required || !$scope.usuario.dadosBasicos.dataNascimento)
+        if (form.$error.required || !$scope.usuario.dadosBasicos.dataNascimento)
             return false;
 
-        if($scope.confirmacaoInvalida($scope.usuario.login.email, $scope.confirmacaoEmail) ||
+        if ($scope.confirmacaoInvalida($scope.usuario.login.email, $scope.confirmacaoEmail) ||
             $scope.confirmacaoInvalida($scope.usuario.login.senha, $scope.confirmacaoSenha))
             return false;
 
         return true;
-    }
+    };
 
     $scope.abrirModal = function (selector) {
         $(selector).openModal();
-    }
+    };
 
     $scope.aceitarTermosFecharModal = function (selector) {
         $scope.usuario.login.aceitoTermos = true;
         $(selector).closeModal();
-    }
+    };
 
 });

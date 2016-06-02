@@ -115,25 +115,26 @@
                 <div class="row">
 
                     <div class="input-field col s12 m4">
-                        <input id="cep_input" name="cep" type="text" class="validate" ui-br-cep-mask
-                               ng-model="usuario.endereco.cep" required>
+                        <input id="cep_input" type="text" class="validate" name="cep" ui-br-cep-mask
+                               ng-model="usuario.endereco.cep" required ng-change="setCep(usuario.endereco.cep)">
                         <label for="cep_input">CEP</label>
                     </div>
 
                     <div class="col s12 m2" style="text-overflow: ellipsis">
                         <label>UF</label>
-                        <select id="uf_input" class="browser-default" ng-model="usuario.endereco.uf" required>
+                        <select id="uf_input" class="browser-default" ng-model="usuario.endereco.uf" required
+                                name="uf" ng-change="setUf(usuario.endereco.uf)">
                             <option value=""></option>
-                            <option value="1">PB</option>
+                            <option ng-repeat="uf in ufs" ng-value="uf.id">{{uf.sigla}}</option>
                         </select>
                     </div>
 
                     <div class="col s12 m6">
                         <label>Munic&iacute;pio</label>
                         <select id="municipio_input" class="browser-default" ng-model="usuario.endereco.municipio"
-                                required>
+                                name="municipio" required>
                             <option value=""></option>
-                            <option value="1">Jo&atilde;o Pessoa</option>
+                            <option ng-repeat="mun in municipios" ng-value="mun.id">{{mun.nome}}</option>
                         </select>
                     </div>
 
@@ -167,10 +168,9 @@
                     <div class="input-field col s12 center-align termos-uso-div">
                         <input type="checkbox" id="aceito_termos_input" ng-model="usuario.login.aceitoTermos"
                                name="termos" required/>
-                        <label for="aceito_termos_input">Li e aceito os <a href=""
-                                                                           ng-click="abrirModal('#termosModal')">termos
-                            de
-                            uso</a> do site</label>
+                        <label for="aceito_termos_input">Li e aceito os
+                            <a href="" ng-click="abrirModal('#termosModal')">termos de uso</a> do site
+                        </label>
                     </div>
                 </div>
 
