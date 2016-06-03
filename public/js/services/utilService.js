@@ -1,8 +1,8 @@
 app.factory("Util", function () {
 
-    var _format = function (string, replacements) {
-        return string.replace(/\{(\d+)\}/g, function () {
-            return replacements[arguments[1]];
+    var _format = function (str, args) {
+        return str.replace(/{(\d+)}/g, function (match, number) {
+            return typeof args[number] != 'undefined' ? args[number] : match;
         });
     };
 

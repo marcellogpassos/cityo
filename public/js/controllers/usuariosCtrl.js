@@ -61,7 +61,7 @@ app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderec
 
         Enderecos.consultarCep(cep, function (endereco) {
             if (endereco.erro)
-                console.log(Util.format(Messages.error[1], cep));
+                console.log(Util.format(Messages.error[1], [cep]));
 
             else {
                 $scope.usuario.endereco.bairro = endereco.bairro;
@@ -80,7 +80,7 @@ app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderec
             $scope.setCepBusy = false;
 
         }, function (error) {
-            console.log(Util.format(Messages.error[1], cep));
+            console.log(Util.format(Messages.error[1], [cep]));
 
             $scope.setCepBusy = false;
         });
@@ -99,14 +99,14 @@ app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderec
                     $scope.municipios = municipios;
                 } else {
                     var errorMessage =
-                        municipios ? municipios.mensagem : Util.format(Messages.error[2], ufId);
+                        municipios ? municipios.mensagem : Util.format(Messages.error[2], [ufId]);
 
                     console.log(errorMessage);
                 }
 
                 $scope.setUfBusy = false;
             }, function (error) {
-                console.log(Util.format(Messages.error[2], ufId));
+                console.log(Util.format(Messages.error[2], [ufId]));
 
                 $scope.setUfBusy = true;
             });
@@ -115,7 +115,8 @@ app.controller('usuariosCtrl', function ($scope, $rootScope, Datepicker, Enderec
     };
 
     $scope.cadastrarUsuario = function (usuario) {
-        alert(Util.format(Messages.success[0], usuario.dadosBasicos.nome));
+        alert(Util.format(Messages.success[0], [usuario.dadosBasicos.nome]));
+        // TODO: implementar cadastrarUsuario(usuario)
     };
 
     $scope.confirmacaoInvalida = function (campo, confirmacaoEmailCampo) {
