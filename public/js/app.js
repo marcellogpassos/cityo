@@ -4,7 +4,7 @@ var app = angular.module('cityo', [
     'ui.utils.masks'
 ]);
 
-app.run(['$rootScope', function ($rootScope) {
+app.run(['$rootScope', 'MessagesService', function ($rootScope, MessagesService) {
 
     $rootScope.safeApply = function (fn) {
         var phase = this.$root.$$phase;
@@ -15,5 +15,7 @@ app.run(['$rootScope', function ($rootScope) {
         else
             this.$apply(fn);
     };
+
+    $rootScope.messages = MessagesService.getMessage;
 
 }]);

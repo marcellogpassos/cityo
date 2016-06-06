@@ -29,7 +29,7 @@
 
                     <div class="input-field col s12 offset-m2 m4">
                         <input id="senha_input" name="senha" type="password" class="validate"
-                               ng-model="usuario.login.senha" required maxlength="32"
+                               ng-model="usuario.login.senha" required minlength="6" maxlength="32"
                                ng-model-options="{ updateOn: 'blur' }">
                         <label for="senha_input">Senha</label>
                     </div>
@@ -46,14 +46,20 @@
                 <div class="row">
                     <div class="error-message-div red lighten-4 col offset-m3 s12 m6"
                          ng-if="confirmacaoInvalida(usuario.login.email,confirmacaoEmail)">
-                        <p class="error-message">Os e-mails n&atilde;o conferem!</p>
+                        <p class="error-message">{{messages('error', 7)}}</p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="error-message-div red lighten-4 col offset-m3 s12 m6"
                          ng-if="confirmacaoInvalida(usuario.login.senha, confirmacaoSenha)">
-                        <p class="error-message">As senhas n&atilde;o conferem!</p>
+                        <p class="error-message">{{messages('error', 6)}}</p>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="usuarioForm.senha.$dirty && usuarioForm.senha.$error.minlength">
+                    <div class="error-message-div red lighten-4 col offset-m3 s12 m6">
+                        <p class="error-message">{{messages('error', 5, ['senha', '6'])}}</p>
                     </div>
                 </div>
 
@@ -178,11 +184,17 @@
                 <div class="row">
                     <div class="error-message-div red lighten-4 col offset-m3 s12 m6"
                          ng-repeat="erro in usuarioForm.$error.required" ng-if="erro.$dirty">
-                        <p class="error-message">O campo: '{{erro.$name}}' &eacute; obrigat&oacute;rio </p>
+                        <p class="error-message">{{messages('error', 4, [erro.$name])}}</p>
                     </div>
                     <div class="error-message-div red lighten-4 col offset-m3 s12 m6"
                          ng-if="usuario.login.aceitoTermos && !usuario.dadosBasicos.dataNascimento">
-                        <p class="error-message">O campo: 'Data de nascimento' &eacute; obrigat&oacute;rio </p>
+                        <p class="error-message">{{messages('error', 4, ['Data de nascimento'])}}</p>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="usuarioForm.cpf.$dirty && usuarioForm.cpf.$error.cpf && document.activeElement.name != 'cpf'">
+                    <div class="error-message-div red lighten-4 col offset-m3 s12 m6">
+                        <p class="error-message">{{messages('error', 3)}}</p>
                     </div>
                 </div>
 

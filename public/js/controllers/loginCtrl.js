@@ -1,4 +1,4 @@
-app.controller('loginCtrl', function ($scope, Util, Messages) {
+app.controller('loginCtrl', function ($scope, $rootScope) {
 
     $scope.credenciais = {
         email: null,
@@ -6,7 +6,7 @@ app.controller('loginCtrl', function ($scope, Util, Messages) {
     };
 
     $scope.login = function (credenciais) {
-        alert(Util.format(Messages.success[1], [credenciais.email]));
+        alert($rootScope.messages('success', 1, [credenciais.email]));
         // TODO: implementar login(credenciais)
     };
 
@@ -17,7 +17,7 @@ app.controller('loginCtrl', function ($scope, Util, Messages) {
     $scope.fecharModalResetarSenha = function (selector, email) {
         $(selector).closeModal();
         if (email)
-            alert(Util.format(Messages.information[0], [email]));
+            alert($rootScope.messages('information', 0, [email]));
         // TODO: implementar fecharModalResetarSenha(selector, email)
     };
 
