@@ -12,14 +12,14 @@
                     <div class="input-field col s12">
                         <input id="email_input" type="email" class="validate" ng-model="credenciais.email" name="email"
                                maxlength="255" required ng-model-options="{ updateOn: 'blur' }">
-                        <label ng-class="{'active' : credenciais.email}" for="email_input">Email</label>
+                        <label ng-class="{'active' : credenciais.email}" for="email_input">E-mail</label>
                     </div>
 
                     <div class="input-field col s12">
                         <input id="password_input" type="password" class="validate" ng-model="credenciais.senha"
                                name="senha" minlength="6" maxlength="32" required
                                ng-model-options="{ updateOn: 'blur' }">
-                        <label ng-class="{'active' : credenciais.senha}" for="password_input">Password</label>
+                        <label ng-class="{'active' : credenciais.senha}" for="password_input">Senha</label>
                     </div>
                 </div>
 
@@ -42,13 +42,13 @@
                 <div class="row">
                     <div class="error-message-div red lighten-4 col offset-m3 s12 m6"
                          ng-repeat="erro in loginForm.$error.required" ng-if="erro.$dirty">
-                        <p class="error-message">O campo: '{{erro.$name}}' &eacute; obrigat&oacute;rio </p>
+                        <p class="error-message">{{messages('error', 4, [erro.$name])}}</p>
                     </div>
-                </div>
-
-                <div class="row" ng-if="loginForm.senha.$dirty && loginForm.senha.$error.minlength">
-                    <div class="error-message-div red lighten-4 col offset-m3 s12 m6">
-                        <p class="error-message">A senha deve ter pelo menos 6 caracteres</p>
+                    <div class="error-message-div red lighten-4 col s12">
+                        <p class="error-message" ng-if="loginForm.senha.$dirty && loginForm.senha.$error.minlength">
+                            {{messages('error', 5, ['senha', '6'])}}</p>
+                        <p class="error-message" ng-if="loginForm.email.$error.email">
+                            {{messages('error', 8)}}</p>
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@
                     <div class="col s12 m6">
                         <button class="btn btn-block waves-effect waves-light blue" type="button" name="action"
                                 ng-click="login(credenciais)">
-                            Login
+                            Entrar
                         </button>
                     </div>
                     <div class="col s12 m6">
@@ -96,5 +96,4 @@
         </form>
     </div>
 
-</div>
 </div>

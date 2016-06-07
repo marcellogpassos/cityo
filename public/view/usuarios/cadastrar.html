@@ -44,22 +44,15 @@
                 </div>
 
                 <div class="row">
-                    <div class="error-message-div red lighten-4 col offset-m3 s12 m6"
-                         ng-if="confirmacaoInvalida(usuario.login.email,confirmacaoEmail)">
-                        <p class="error-message">{{messages('error', 7)}}</p>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="error-message-div red lighten-4 col offset-m3 s12 m6"
-                         ng-if="confirmacaoInvalida(usuario.login.senha, confirmacaoSenha)">
-                        <p class="error-message">{{messages('error', 6)}}</p>
-                    </div>
-                </div>
-
-                <div class="row" ng-if="usuarioForm.senha.$dirty && usuarioForm.senha.$error.minlength">
                     <div class="error-message-div red lighten-4 col offset-m3 s12 m6">
-                        <p class="error-message">{{messages('error', 5, ['senha', '6'])}}</p>
+                        <p ng-if="usuarioForm.email.$dirty && usuarioForm.email.$error.email" class="error-message">
+                            {{messages('error', 8)}}</p>
+                        <p ng-if="confirmacaoInvalida(usuario.login.email,confirmacaoEmail)" class="error-message">
+                            {{messages('error', 7)}}</p>
+                        <p ng-if="confirmacaoInvalida(usuario.login.senha, confirmacaoSenha)" class="error-message">
+                            {{messages('error', 6)}}</p>
+                        <p ng-if="usuarioForm.senha.$dirty && usuarioForm.senha.$error.minlength" class="error-message">
+                            {{messages('error', 5, ['senha', '6'])}}</p>
                     </div>
                 </div>
 
@@ -166,7 +159,8 @@
                     <div class="input-field col s12 m6">
                         <input id="complemento_input" name="complemento" type="text" class="validate"
                                ng-model="usuario.endereco.complemento" maxlength="255" ng-disabled="setCepBusy">
-                        <label ng-class="{'active' : usuario.endereco.complemento}" for="complemento_input">Complemento</label>
+                        <label ng-class="{'active' : usuario.endereco.complemento}"
+                               for="complemento_input">Complemento</label>
                     </div>
 
                 </div>
@@ -186,21 +180,18 @@
                          ng-repeat="erro in usuarioForm.$error.required" ng-if="erro.$dirty">
                         <p class="error-message">{{messages('error', 4, [erro.$name])}}</p>
                     </div>
-                    <div class="error-message-div red lighten-4 col offset-m3 s12 m6"
-                         ng-if="usuario.login.aceitoTermos && !usuario.dadosBasicos.dataNascimento">
-                        <p class="error-message">{{messages('error', 4, ['Data de nascimento'])}}</p>
-                    </div>
-                </div>
-
-                <div class="row" ng-if="usuarioForm.cpf.$dirty && usuarioForm.cpf.$error.cpf && document.activeElement.name != 'cpf'">
                     <div class="error-message-div red lighten-4 col offset-m3 s12 m6">
-                        <p class="error-message">{{messages('error', 3)}}</p>
+                        <p ng-if="usuario.login.aceitoTermos && !usuario.dadosBasicos.dataNascimento"
+                           class="error-message">{{messages('error', 4, ['Data de nascimento'])}}</p>
+                        <p ng-if="usuarioForm.cpf.$dirty && usuarioForm.cpf.$error.cpf && document.activeElement.name != 'cpf'"
+                           class="error-message">{{messages('error', 3)}}</p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12 center-align">
-                        <button type="submit" name="action" ng-click="cadastrarUsuario(usuario)" ng-disabled="!validarFormulario(usuarioForm)"
+                        <button type="submit" name="action" ng-click="cadastrarUsuario(usuario)"
+                                ng-disabled="!validarFormulario(usuarioForm)"
                                 class="btn blue waves-effect waves-light ng-class:{ 'disabled': !validarFormulario(usuarioForm) };">
                             Cadastrar
                         </button>

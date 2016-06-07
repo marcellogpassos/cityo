@@ -7,7 +7,8 @@ app.constant("Messages", {
         "O campo {0} é obrigatório",                                                                                    // 4
         "O campo {0} deve ter pelo menos {1} caracteres",                                                               // 5
         "As senhas não conferem",                                                                                       // 6
-        "Os e-mails não conferem"                                                                                       // 7
+        "Os e-mails não conferem",                                                                                      // 7
+        "E-mail inválido"                                                                                               // 8
     ],
     information: [
         "Um link para resetar a senha foi enviado para: {0}"                                                            // 0
